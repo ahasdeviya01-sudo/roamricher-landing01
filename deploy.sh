@@ -151,23 +151,47 @@ npm install
 npm run build
 echo "  Build complete ✅  (dist/ ready)"
 
-# ── 7. Configure Nginx ───────────────────────────────────────────
+# ── 7. Configure Nginx (HTTP-only first, SSL added after cert) ───
 echo "[7/8] Configuring Nginx..."
 sudo mkdir -p "$NGINX_CONF_DIR"
-sudo cp "$APP_DIR/nginx/roamricher.conf" "$NGINX_CONF_FILE"
 
 if [ "$PKG" = "apt" ]; then
-  # Debian/Ubuntu: enable via sites-enabled symlink
-  sudo ln -sf "$NGINX_CONF_FILE" /etc/nginx/sites-enabled/roamricher.conf
-  # Disable default site to avoid conflicts
   sudo rm -f /etc/nginx/sites-enabled/default
-else
-  # Amazon Linux: conf.d is auto-loaded — remove default if any
-  sudo rm -f /etc/nginx/conf.d/default.conf
+fi
+sudo rm -f /etc/nginx/conf.d/default.conf
+
+# Write a temporary HTTP-only config so nginx can start cleanly.
+# certbot needs nginx running on port 80; the SSL block is added after cert is obtained.
+sudo bash -c "cat > $NGINX_CONF_FILE" << 'NGINX_HTTP_ONLY'
+# Temporary config — SSL will be added after certbot runs
+server {
+    listen 80;
+    listen [::]:80;
+    server_name roamricher.com www.roamricher.com;
+
+    # Let's Encrypt webroot challenge
+    location /.well-known/acme-challenge/ {
+        root /var/www/html;
+    }
+
+    # Proxy everything to Express (HTTP for now)
+    location / {
+        proxy_pass         http://127.0.0.1:3001;
+        proxy_http_version 1.1;
+        proxy_set_header   Host $host;
+        proxy_set_header   X-Real-IP $remote_addr;
+        proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_read_timeout 60s;
+    }
+}
+NGINX_HTTP_ONLY
+
+if [ "$PKG" = "apt" ]; then
+  sudo ln -sf "$NGINX_CONF_FILE" /etc/nginx/sites-enabled/roamricher.conf
 fi
 
 sudo nginx -t && sudo systemctl reload nginx
-echo "  Nginx configured ✅"
+echo "  Nginx running (HTTP) ✅"
 
 # ── 8. SSL via Let's Encrypt + Certbot ───────────────────────────
 echo "[8/8] Setting up SSL..."
@@ -178,9 +202,11 @@ echo ""
 read -rp "  Is DNS pointed to $PUBLIC_IP with proxy OFF? [y/N]: " CONFIRM
 
 if [[ "$CONFIRM" =~ ^[Yy]$ ]]; then
+  # Create webroot dir for certbot challenge
+  sudo mkdir -p /var/www/html
+
   # Install certbot — method differs by OS
   if [ "$PKG" = "dnf" ]; then
-    # Amazon Linux 2023 — certbot via pip (most reliable)
     if ! command -v certbot &>/dev/null; then
       sudo dnf install -y python3-pip augeas-libs
       sudo python3 -m venv /opt/certbot/
@@ -189,23 +215,35 @@ if [[ "$CONFIRM" =~ ^[Yy]$ ]]; then
       sudo ln -sf /opt/certbot/bin/certbot /usr/bin/certbot
     fi
   else
-    # Ubuntu/Debian — certbot via snap (official recommended way)
     sudo apt-get install -y snapd
     sudo snap install core 2>/dev/null; sudo snap refresh core 2>/dev/null
     sudo snap install --classic certbot
     sudo ln -sf /snap/bin/certbot /usr/bin/certbot 2>/dev/null || true
   fi
 
-  # Obtain certificate
-  sudo certbot --nginx \
+  # Get the cert using webroot (nginx stays running on port 80)
+  sudo certbot certonly \
+    --webroot \
+    --webroot-path /var/www/html \
     --non-interactive \
     --agree-tos \
     --email "$EMAIL" \
-    --redirect \
     -d "$DOMAIN" \
     -d "www.$DOMAIN"
 
-  # Auto-renew via cron (works on all distros)
+  # Now install the FULL SSL nginx config
+  sudo cp "$APP_DIR/nginx/roamricher.conf" "$NGINX_CONF_FILE"
+  # Uncomment the ssl_certificate lines that certbot just created
+  sudo sed -i "s|# ssl_certificate |ssl_certificate |g" "$NGINX_CONF_FILE"
+  sudo sed -i "s|# ssl_certificate_key |ssl_certificate_key |g" "$NGINX_CONF_FILE"
+
+  if [ "$PKG" = "apt" ]; then
+    sudo ln -sf "$NGINX_CONF_FILE" /etc/nginx/sites-enabled/roamricher.conf
+  fi
+
+  sudo nginx -t && sudo systemctl reload nginx
+
+  # Auto-renew via cron
   (sudo crontab -l 2>/dev/null; echo "0 3 * * * /usr/bin/certbot renew --quiet --post-hook 'systemctl reload nginx'") \
     | sort -u | sudo crontab -
 
@@ -220,7 +258,10 @@ if [[ "$CONFIRM" =~ ^[Yy]$ ]]; then
 else
   echo ""
   echo "  ⏭  Skipped SSL. Run later manually:"
-  echo "     sudo certbot --nginx -d $DOMAIN -d www.$DOMAIN"
+  echo "     sudo certbot certonly --webroot --webroot-path /var/www/html -d $DOMAIN -d www.$DOMAIN"
+  echo "     Then: sudo cp $APP_DIR/nginx/roamricher.conf $NGINX_CONF_FILE"
+  echo "           sudo sed -i 's|# ssl_certificate |ssl_certificate |g' $NGINX_CONF_FILE"
+  echo "           sudo nginx -t && sudo systemctl reload nginx"
 fi
 
 # ── Start app with PM2 ───────────────────────────────────────────

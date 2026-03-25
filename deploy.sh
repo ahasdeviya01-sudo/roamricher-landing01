@@ -78,15 +78,20 @@ fi
 
 if [ "$NODE_MAJOR" -lt 20 ] 2>/dev/null; then
   echo "  Found Node v$(node -v 2>/dev/null || echo 'none') — upgrading to v20..."
+  # Kill PM2 daemon so it releases the old node binary before removal
+  pm2 kill 2>/dev/null || true
   if [ "$PKG" = "dnf" ]; then
-    sudo dnf remove -y nodejs nodejs-npm 2>/dev/null || true
+    # Remove both nodesource package AND Amazon's own nodejs18 package
+    sudo dnf remove -y nodejs nodejs-npm nodejs18 nodejs18-npm 2>/dev/null || true
     curl -fsSL https://rpm.nodesource.com/setup_20.x | sudo bash -
     sudo dnf install -y nodejs
   else
-    sudo apt-get remove -y nodejs 2>/dev/null || true
+    sudo apt-get remove -y nodejs nodejs18 2>/dev/null || true
     curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
     sudo apt-get install -y nodejs
   fi
+  # Reinstall PM2 under the new Node version
+  sudo npm install -g pm2 --silent
 else
   echo "  Node $(node -v) already installed — skipping."
 fi

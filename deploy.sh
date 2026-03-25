@@ -71,14 +71,24 @@ fi
 
 # ── 2. Install Node.js 20 LTS ────────────────────────────────────
 echo "[2/8] Installing Node.js 20 LTS..."
-if ! command -v node &> /dev/null; then
+NODE_MAJOR=0
+if command -v node &>/dev/null; then
+  NODE_MAJOR=$(node -e "process.stdout.write(process.versions.node.split('.')[0])")
+fi
+
+if [ "$NODE_MAJOR" -lt 20 ] 2>/dev/null; then
+  echo "  Found Node v$(node -v 2>/dev/null || echo 'none') — upgrading to v20..."
   if [ "$PKG" = "dnf" ]; then
+    sudo dnf remove -y nodejs nodejs-npm 2>/dev/null || true
     curl -fsSL https://rpm.nodesource.com/setup_20.x | sudo bash -
     sudo dnf install -y nodejs
   else
+    sudo apt-get remove -y nodejs 2>/dev/null || true
     curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
     sudo apt-get install -y nodejs
   fi
+else
+  echo "  Node $(node -v) already installed — skipping."
 fi
 echo "  Node: $(node -v)  |  npm: $(npm -v)"
 

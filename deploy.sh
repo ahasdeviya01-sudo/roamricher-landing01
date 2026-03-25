@@ -129,7 +129,10 @@ fi
 # ── 6. Build the frontend ────────────────────────────────────────
 echo "[6/8] Installing npm packages & building frontend..."
 cd "$APP_DIR"
-npm install --silent
+# Always do a clean install to avoid @tailwindcss/oxide native binding issues
+# that occur when package-lock.json was generated on a different OS/arch.
+rm -rf node_modules package-lock.json
+npm install
 npm run build
 echo "  Build complete ✅  (dist/ ready)"
 

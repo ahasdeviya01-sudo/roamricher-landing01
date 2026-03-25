@@ -6,3 +6,6 @@ coverage/
 *.log
 .env*
 !.env.example
+# platform-specific native bindings (e.g. @tailwindcss/oxide) break
+# when package-lock.json is generated on a different OS or CPU arch.
+package-lock.json

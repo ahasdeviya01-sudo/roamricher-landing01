@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #0e0b07;
+  --color-cream: #f5f0e8;
+  --color-gold: #c9a84c;
+  --color-gold-light: #e8c96a;
+  --color-teal: #3dbdb5;
+  --color-rust: #c85a2a;
+  --color-warm-gray: #2a2420;
+  --color-mid: #5a4f45;
+
+  --font-playfair: "Playfair Display", serif;
+  --font-sans: "DM Sans", sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-ink text-cream font-sans overflow-x-hidden;
+  }
+}
+
+@layer utilities {
+  .hero-bg {
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(201,168,76,0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 40% at 20% 80%, rgba(61,189,181,0.06) 0%, transparent 60%);
+  }
+
+  .hero-grid {
+    background-image:
+      linear-gradient(rgba(245,240,232,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(245,240,232,0.04) 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
+
+  .markdown-body h1, .markdown-body h2, .markdown-body h3 {
+    font-family: 'Playfair Display', serif;
+    color: #c9a84c;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+  }
+
+  .markdown-body h1 { font-size: 1.5rem; }
+  .markdown-body h2 { font-size: 1.25rem; }
+  .markdown-body h3 { font-size: 1.1rem; }
+
+  .markdown-body p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    color: rgba(245, 240, 232, 0.7);
+  }
+
+  .markdown-body ul, .markdown-body ol {
+    margin-bottom: 1rem;
+    padding-left: 1.25rem;
+    list-style-type: disc;
+  }
+
+  .markdown-body li {
+    margin-bottom: 0.5rem;
+    color: rgba(245, 240, 232, 0.7);
+  }
+
+  .markdown-body strong {
+    color: #f5f0e8;
+    font-weight: 600;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(201, 168, 76, 0.2);
+    border-radius: 10px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(201, 168, 76, 0.4);
+  }
+}

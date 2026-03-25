@@ -1,44 +1,267 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" prefix="og: https://ogp.me/ns#">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Roam Richer | Stop Googling. Start Roaming.</title>
-    <meta name="description" content="Ready-made routes built from local knowledge — matched to your budget, days and interests. No planning. No agencies. No tourist traps." />
-    <meta name="keywords" content="travel itineraries, local travel, budget travel, authentic travel, Roam Richer, travel planner, custom trips, hidden gems, non-touristy" />
+
+    <!-- ═══════════════════════════════════════════════
+         PRIMARY SEO
+    ═══════════════════════════════════════════════ -->
+    <title>Roam Richer | Stop Googling. Start Roaming. | Budget Travel Itineraries</title>
+    <meta name="description" content="Roam Richer gives you ready-made travel routes built from real local knowledge — matched to your budget, days and interests. No agencies. No tourist traps. 27 countries, 20,000+ hidden gems." />
+    <meta name="keywords" content="budget travel itineraries, travel routes, local travel guide, cheap travel SE Asia, Vietnam itinerary, Thailand itinerary, Bali travel guide, hidden gems travel, non-touristy travel, authentic travel experiences, travel planner app, AI travel itinerary, budget backpacker guide, Southeast Asia travel, Japan itinerary, India budget travel, Cambodia travel guide, Nepal trekking, Philippines travel, Malaysia itinerary, Laos travel, Myanmar travel guide, custom trip planner, roam richer" />
     <meta name="author" content="Roam Richer" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-    <link rel="canonical" href="https://roamricher.com/" />
+    <meta name="revisit-after" content="7 days" />
+    <meta name="rating" content="general" />
+    <meta name="language" content="English" />
+    <meta name="category" content="Travel, Tourism, Travel Planning" />
+    <meta name="coverage" content="Worldwide" />
+    <meta name="distribution" content="Global" />
+    <meta name="target" content="all" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
 
-    <!-- Open Graph / Facebook -->
+    <!-- Canonical & hreflang -->
+    <link rel="canonical" href="https://roamricher.com/" />
+    <link rel="alternate" hreflang="en" href="https://roamricher.com/" />
+    <link rel="alternate" hreflang="x-default" href="https://roamricher.com/" />
+
+    <!-- ═══════════════════════════════════════════════
+         PERFORMANCE — Preconnect / DNS-prefetch
+    ═══════════════════════════════════════════════ -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://images.unsplash.com" />
+    <link rel="dns-prefetch" href="https://ipapi.co" />
+    <link rel="dns-prefetch" href="https://tile.openstreetmap.org" />
+
+    <!-- ═══════════════════════════════════════════════
+         FAVICON & ICONS
+    ═══════════════════════════════════════════════ -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#0a0a0f" />
+    <meta name="msapplication-TileColor" content="#0a0a0f" />
+
+    <!-- ═══════════════════════════════════════════════
+         OPEN GRAPH (Facebook, LinkedIn, WhatsApp, Slack)
+    ═══════════════════════════════════════════════ -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://roamricher.com/" />
-    <meta property="og:title" content="Roam Richer | Stop Googling. Start Roaming." />
-    <meta property="og:description" content="Ready-made routes built from local knowledge — matched to your budget, days and interests. No planning. No agencies. No tourist traps." />
-    <meta property="og:image" content="https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=1200&h=630&fit=crop" />
     <meta property="og:site_name" content="Roam Richer" />
+    <meta property="og:title" content="Roam Richer | Stop Googling. Start Roaming." />
+    <meta property="og:description" content="Ready-made travel routes built from real local knowledge. 27 countries, 20,000+ hidden gems, zero tourist traps. Free to try — no agency fees." />
+    <meta property="og:image" content="https://roamricher.com/og-image.jpg" />
+    <meta property="og:image:secure_url" content="https://roamricher.com/og-image.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Roam Richer — Stop Googling, Start Roaming. Budget travel routes from local experts." />
+    <meta property="og:locale" content="en_US" />
 
-    <!-- Twitter -->
+    <!-- ═══════════════════════════════════════════════
+         TWITTER / X CARD
+    ═══════════════════════════════════════════════ -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@roamricher" />
+    <meta name="twitter:creator" content="@roamricher" />
     <meta name="twitter:url" content="https://roamricher.com/" />
     <meta name="twitter:title" content="Roam Richer | Stop Googling. Start Roaming." />
-    <meta name="twitter:description" content="Ready-made routes built from local knowledge — matched to your budget, days and interests. No planning. No agencies. No tourist traps." />
-    <meta name="twitter:image" content="https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=1200&h=630&fit=crop" />
+    <meta name="twitter:description" content="Ready-made travel routes from real local knowledge. 27 countries, 20,000+ hidden gems, zero tourist traps." />
+    <meta name="twitter:image" content="https://roamricher.com/og-image.jpg" />
+    <meta name="twitter:image:alt" content="Roam Richer travel routes" />
 
-    <!-- JSON-LD Schema -->
+    <!-- ═══════════════════════════════════════════════
+         JSON-LD STRUCTURED DATA
+    ═══════════════════════════════════════════════ -->
+
+    <!-- 1. WebSite + SearchAction (Sitelinks Search Box) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Roam Richer",
+      "alternateName": "RoamRicher",
+      "url": "https://roamricher.com",
+      "description": "Ready-made travel itineraries built from local knowledge — matched to your budget, days and interests.",
+      "inLanguage": "en-US",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://roamricher.com/?destination={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    <!-- 2. Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Roam Richer",
+      "url": "https://roamricher.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://roamricher.com/og-image.jpg",
+        "width": 1200,
+        "height": 630
+      },
+      "description": "Roam Richer provides AI-powered, locally-sourced travel itineraries for budget-conscious travellers across 27 countries.",
+      "foundingDate": "2025",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "email": "hello@roamricher.com",
+        "availableLanguage": "English"
+      },
+      "sameAs": [
+        "https://www.instagram.com/roamricher",
+        "https://www.facebook.com/roamricher",
+        "https://twitter.com/roamricher"
+      ]
+    }
+    </script>
+
+    <!-- 3. TravelAgency / Service -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "TravelAgency",
       "name": "Roam Richer",
-      "description": "Personalized, budget-optimized travel itineraries built on real local knowledge.",
       "url": "https://roamricher.com",
-      "logo": "https://roamricher.com/logo.png",
-      "sameAs": [
-        "https://www.facebook.com/roam.richer"
+      "description": "Personalized, budget-optimized travel itineraries built on real local knowledge for 27 countries.",
+      "areaServed": {
+        "@type": "Place",
+        "name": "Worldwide"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Travel Itineraries",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "TouristTrip", "name": "Vietnam Budget Itinerary", "touristType": "Budget Traveller" } },
+          { "@type": "Offer", "itemOffered": { "@type": "TouristTrip", "name": "Thailand Budget Itinerary", "touristType": "Budget Traveller" } },
+          { "@type": "Offer", "itemOffered": { "@type": "TouristTrip", "name": "Bali Budget Itinerary", "touristType": "Budget Traveller" } },
+          { "@type": "Offer", "itemOffered": { "@type": "TouristTrip", "name": "Japan Itinerary", "touristType": "Budget Traveller" } },
+          { "@type": "Offer", "itemOffered": { "@type": "TouristTrip", "name": "India Budget Itinerary", "touristType": "Budget Traveller" } }
+        ]
+      }
+    }
+    </script>
+
+    <!-- 4. FAQPage -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How are Roam Richer routes actually built?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We don't scrape TripAdvisor. We work with local fixers and long-term residents in each country to map out actual paths they take. Every spot is verified for price, quality, and tourist-trap status."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is it safe to travel this cheaply?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cheap doesn't mean dangerous. In many of our covered countries, $20/day gets you a clean, safe boutique hostel and incredible fresh food. We prioritize safety in our route selection, focusing on well-traveled but authentic paths."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need to book everything in advance?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our routes are designed for flexibility. While we recommend booking your first 2 nights, most of our Roamers book as they go using the apps and local tips we provide in the full guide."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if a place is closed or changed?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our database is updated weekly. When you access a route, you're getting the most current version. We also provide Alternative Roams for every major stop just in case."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much does Roam Richer cost?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Roam Richer route previews are completely free — no agency fees, no hidden charges. Full unlimited access is available when we launch. Join the waitlist for early access."
+          }
+        }
       ]
     }
     </script>
+
+    <!-- 5. ItemList — Destination Pages -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Roam Richer Travel Destinations",
+      "description": "Budget travel itineraries for 27 countries across Asia and beyond.",
+      "url": "https://roamricher.com",
+      "numberOfItems": 11,
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Vietnam Travel Itinerary", "url": "https://roamricher.com/destination/vietnam" },
+        { "@type": "ListItem", "position": 2, "name": "Thailand Travel Itinerary", "url": "https://roamricher.com/destination/thailand" },
+        { "@type": "ListItem", "position": 3, "name": "Bali Travel Itinerary", "url": "https://roamricher.com/destination/bali" },
+        { "@type": "ListItem", "position": 4, "name": "Malaysia Travel Itinerary", "url": "https://roamricher.com/destination/malaysia" },
+        { "@type": "ListItem", "position": 5, "name": "Japan Travel Itinerary", "url": "https://roamricher.com/destination/japan" },
+        { "@type": "ListItem", "position": 6, "name": "Cambodia Travel Itinerary", "url": "https://roamricher.com/destination/cambodia" },
+        { "@type": "ListItem", "position": 7, "name": "Laos Travel Itinerary", "url": "https://roamricher.com/destination/laos" },
+        { "@type": "ListItem", "position": 8, "name": "India Travel Itinerary", "url": "https://roamricher.com/destination/india" },
+        { "@type": "ListItem", "position": 9, "name": "Philippines Travel Itinerary", "url": "https://roamricher.com/destination/philippines" },
+        { "@type": "ListItem", "position": 10, "name": "Myanmar Travel Itinerary", "url": "https://roamricher.com/destination/myanmar" },
+        { "@type": "ListItem", "position": 11, "name": "Nepal Travel Itinerary", "url": "https://roamricher.com/destination/nepal" }
+      ]
+    }
+    </script>
+
+    <!-- 6. BreadcrumbList (homepage) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://roamricher.com/"
+        }
+      ]
+    }
+    </script>
+
+    <!-- 7. SiteNavigationElement -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SiteNavigationElement",
+      "name": ["Home", "Preview A Route", "How It Works", "Destinations", "Get Early Access"],
+      "url": [
+        "https://roamricher.com/",
+        "https://roamricher.com/#generator",
+        "https://roamricher.com/#how",
+        "https://roamricher.com/#destinations",
+        "https://roamricher.com/#waitlist"
+      ]
+    }
+    </script>
+
   </head>
   <body>
     <div id="root"></div>

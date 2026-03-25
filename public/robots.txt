@@ -1,0 +1,27 @@
+# Roam Richer — robots.txt
+# https://roamricher.com
+
+User-agent: *
+Allow: /
+
+# Block access to API routes — no crawling of backend
+Disallow: /api/
+
+# Block server-side source files
+Disallow: /server/
+
+# Sitemaps
+Sitemap: https://roamricher.com/sitemap.xml
+
+# Crawl-delay for less aggressive bots
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+User-agent: MJ12bot
+Crawl-delay: 30
+
+User-agent: DotBot
+Disallow: /
